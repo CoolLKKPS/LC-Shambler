@@ -3019,7 +3019,7 @@ namespace SoulDev
 
 		protected float leaptime = 0f;
 
-		protected Vector3 leapPos;
+		protected Vector3 leapPos = default;
 
 		protected EntranceTeleport nearestEntrance = null;
 
@@ -3045,7 +3045,7 @@ namespace SoulDev
 
 		public int provokePoints = 0;
 
-		public Transform turnCompass;
+		public Transform turnCompass = null!;
 
 		protected float timeSinceHittingLocalPlayer;
 
@@ -3053,7 +3053,7 @@ namespace SoulDev
 
 		protected Vector3 positionRandomness;
 
-		protected Vector3 StalkPos;
+		protected Vector3 StalkPos = default;
 
 		protected System.Random enemyRandom;
 
@@ -3061,23 +3061,23 @@ namespace SoulDev
 
 		private bool markDead = false;
 
-		public AudioSource creatureLeapLand;
+		public AudioSource creatureLeapLand = null!;
 
-		public AudioSource creatureAnger;
+		public AudioSource creatureAnger = null!;
 
 		private float angerSoundTimer = 0f;
 
-		public AudioSource creatureLaugh;
+		public AudioSource creatureLaugh = null!;
 
-		public AudioSource creaturePlant;
+		public AudioSource creaturePlant = null!;
 
-		public AudioSource creatureSneakyStab;
+		public AudioSource creatureSneakyStab = null!;
 
-		public AudioSource creatureDeath;
+		public AudioSource creatureDeath = null!;
 
-		public AudioSource creatureTakeDmg;
+		public AudioSource creatureTakeDmg = null!;
 
-		public AudioSource[] creatureSteps;
+		public AudioSource[] creatureSteps = null!;
 
 		protected float runAnimationCoefficient = 14f;
 
@@ -3090,7 +3090,7 @@ namespace SoulDev
 
 		private Vector3 lastGoal = Vector3.zero;
 
-		private float lastGoalScore = 0f;
+		// private float lastGoalScore = 0f;
 
 		private bool usingCustomGoal = false;
 
@@ -3106,9 +3106,9 @@ namespace SoulDev
 
 		private bool isStabbing = false;
 
-		public Transform stabPoint;
+		public Transform stabPoint = null!;
 
-		public AudioSource creatureStab;
+		public AudioSource creatureStab = null!;
 
 		private bool doneLeap = false;
 
@@ -3128,7 +3128,7 @@ namespace SoulDev
 
 		private bool stabbedCapturedPlayer = false;
 
-		public Transform capturePoint;
+		public Transform capturePoint = null!;
 
 		public float captureRange = 5.35f;
 
@@ -3182,15 +3182,15 @@ namespace SoulDev
 		[SerializeField]
 		private float seenGrace = 0.9f;
 
-		public Transform footLCol;
+		public Transform footLCol = null!;
 
-		public Transform footRCol;
+		public Transform footRCol = null!;
 
-		public Transform armLCol;
+		public Transform armLCol = null!;
 
-		public Transform armRCol;
+		public Transform armRCol = null!;
 
-		public Transform headCol;
+		public Transform headCol = null!;
 
 		[SerializeField]
 		private float coverRequiredFraction = 0.7f;
@@ -3213,7 +3213,7 @@ namespace SoulDev
 
 		private bool donePlant = false;
 
-		public GameObject heldStakeRef;
+		public GameObject heldStakeRef = null!;
 
 		public float plantCooldown = 5f;
 

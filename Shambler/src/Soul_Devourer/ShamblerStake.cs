@@ -907,13 +907,13 @@ namespace Shambler.src.Soul_Devourer
 
 		public PlayerControllerB victim;
 
-		public Transform stabPoint;
+		public Transform stabPoint = null!;
 
 		private InteractTrigger envTrigger;
 
-		public AudioSource failEscapeSource;
+		public AudioSource failEscapeSource = null!;
 
-		public AudioSource successSource;
+		public AudioSource successSource = null!;
 
 		public float damageTimer = 20f;
 

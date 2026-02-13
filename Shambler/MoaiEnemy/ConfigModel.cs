@@ -31,12 +31,12 @@ namespace MoaiEnemy
 			});
 		}
 
-		public static ConfigEntry<float> moaiGlobalSize;
+		public static ConfigEntry<float> moaiGlobalSize = null!;
 
-		public static ConfigEntry<float> moaiGlobalMusicVol;
+		public static ConfigEntry<float> moaiGlobalMusicVol = null!;
 
-		public static ConfigEntry<float> moaiGlobalRarity;
+		public static ConfigEntry<float> moaiGlobalRarity = null!;
 
-		public static ConfigEntry<float> moaiGlobalSpeed;
+		public static ConfigEntry<float> moaiGlobalSpeed = null!;
 	}
 }
