@@ -1,11 +1,5 @@
-﻿using System;
-using System.Diagnostics;
+﻿using Shambler.NetcodePatcher;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Runtime.Versioning;
-using System.Security;
-using System.Security.Permissions;
-using Shambler.NetcodePatcher;
 
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyCompany("bcs4313")]
