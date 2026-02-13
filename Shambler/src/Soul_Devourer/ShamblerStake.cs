@@ -51,8 +51,12 @@ namespace Shambler.src.Soul_Devourer
         public PlayerControllerB NearestPlayer()
         {
             RoundManager i = RoundManager.Instance;
-            float lowestDist = 999999f;
             PlayerControllerB[] players = i.playersManager.allPlayerScripts;
+            if (players == null || players.Length == 0)
+            {
+                return null;
+            }
+            float lowestDist = 999999f;
             PlayerControllerB nearestPlayer = players[0];
             foreach (PlayerControllerB ply in players)
             {
@@ -274,6 +278,7 @@ namespace Shambler.src.Soul_Devourer
             }
             else
             {
+                if (this.victim == null || this.owner == null) return;
                 bool isPlayerDead = this.victim.isPlayerDead;
                 if (isPlayerDead)
                 {

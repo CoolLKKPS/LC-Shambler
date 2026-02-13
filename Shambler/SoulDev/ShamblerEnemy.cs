@@ -234,7 +234,10 @@ namespace SoulDev
                         this.animator.speed = 1f;
                         this.isDeadAnimationDone = true;
                         this.stopAllSound();
-                        this.creatureVoice.PlayOneShot(this.dieSFX);
+                        if (this.creatureVoice != null && this.dieSFX != null)
+                        {
+                            this.creatureVoice.PlayOneShot(this.dieSFX);
+                        }
                     }
                 }
                 else
@@ -649,7 +652,10 @@ namespace SoulDev
                 this.capturedPlayer = null;
                 this.SetCapturedPlayerClientRpc(0UL, true);
                 this.stabbedCapturedPlayer = true;
-                this.DmgPlayerClientRpc(this.stabbedPlayer.NetworkObject.NetworkObjectId, 30);
+                if (this.stabbedPlayer != null)
+                {
+                    this.DmgPlayerClientRpc(this.stabbedPlayer.NetworkObject.NetworkObjectId, 30);
+                }
                 yield return new WaitForSeconds(0.65f);
                 this.doneStab = true;
                 this.Think("Stab Done");
@@ -746,7 +752,10 @@ namespace SoulDev
             this.capturedPlayer = null;
             this.SetCapturedPlayerClientRpc(0UL, false);
             this.stabbedCapturedPlayer = true;
-            this.DmgPlayerClientRpc(this.stabbedPlayer.NetworkObject.NetworkObjectId, 30);
+            if (this.stabbedPlayer != null)
+            {
+                this.DmgPlayerClientRpc(this.stabbedPlayer.NetworkObject.NetworkObjectId, 30);
+            }
             yield return new WaitForSeconds(1.3f);
             bool flag3 = this.stabbedPlayer;
             if (flag3)
@@ -772,6 +781,7 @@ namespace SoulDev
                 base.SwitchToBehaviourClientRpc(0);
                 base.StartSearch(base.transform.position, null);
                 this.Think("Switched to searching for player");
+                return;
             }
             this.facePosition(this.targetPlayer.transform.position);
             bool flag2 = !this.isLeaping && Vector3.Distance(base.transform.position, this.targetPlayer.transform.position) <= this.maxLeapDistance;
@@ -2516,11 +2526,11 @@ namespace SoulDev
 
         public void stopAllSound()
         {
-            this.creatureSFX.Stop();
-            this.creatureVoice.Stop();
-            this.creatureAnger.Stop();
-            this.creatureLaugh.Stop();
-            this.creatureLeapLand.Stop();
+            if (this.creatureSFX != null) this.creatureSFX.Stop();
+            if (this.creatureVoice != null) this.creatureVoice.Stop();
+            if (this.creatureAnger != null) this.creatureAnger.Stop();
+            if (this.creatureLaugh != null) this.creatureLaugh.Stop();
+            if (this.creatureLeapLand != null) this.creatureLeapLand.Stop();
         }
 
         [ClientRpc]
