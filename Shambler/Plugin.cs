@@ -251,6 +251,7 @@ namespace Shambler
             Plugin.health = base.Config.Bind<int>("Modifiers", "Enemy Health", 6, "Changes the health of all shamblers.");
             Plugin.LOSWidth = base.Config.Bind<float>("Advanced", "Line Of Sight Width", 100f, "Line of sight width for the enemy (by degrees).");
             Plugin.canEnterIndoors = base.Config.Bind<bool>("Modifiers", "Can enter the factory", true, "If shamblers can enter the factory at their own whim. Entry is chance based. The closer a shambler is to an entrance the more likely it will decide to enter.");
+            Plugin.disableColliderOnDeath = base.Config.Bind<bool>("Modifiers", "Disable Collider On Death", true, "If enabled, the Shambler's collider will be disabled when it dies.");
             FloatInputFieldConfigItem spawnRateEntry = new FloatInputFieldConfigItem(Plugin.soulRarity, new FloatInputFieldOptions
             {
                 RequiresRestart = true,
@@ -295,6 +296,10 @@ namespace Shambler
             {
                 RequiresRestart = false
             });
+            BoolCheckBoxConfigItem disableColliderEntry = new BoolCheckBoxConfigItem(Plugin.disableColliderOnDeath, new BoolCheckBoxOptions
+            {
+                RequiresRestart = false
+            });
             LethalConfigManager.AddConfigItem(spawnRateEntry);
             LethalConfigManager.AddConfigItem(distEntry);
             LethalConfigManager.AddConfigItem(volumeSlider);
@@ -303,6 +308,7 @@ namespace Shambler
             LethalConfigManager.AddConfigItem(maxEntry);
             LethalConfigManager.AddConfigItem(healthEntry);
             LethalConfigManager.AddConfigItem(indoorsEntry);
+            LethalConfigManager.AddConfigItem(disableColliderEntry);
         }
 
         public static Harmony _harmony;
@@ -330,6 +336,8 @@ namespace Shambler
         public static ConfigEntry<int> health;
 
         public static ConfigEntry<bool> canEnterIndoors;
+
+        public static ConfigEntry<bool> disableColliderOnDeath;
 
         public static class Assets
         {

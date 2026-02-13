@@ -174,7 +174,18 @@ namespace SoulDev
                 this.moaiSoundPlayClientRpc("creatureDeath");
                 this.deadEventClientRpc();
                 this.markDead = true;
-                base.GetComponent<BoxCollider>().enabled = false;
+                if (Plugin.disableColliderOnDeath.Value)
+                {
+                    foreach (var collider in base.GetComponents<Collider>())
+                    {
+                        collider.enabled = false;
+                    }
+                }
+                else
+                {
+                    var boxCollider = base.GetComponent<BoxCollider>();
+                    if (boxCollider != null) boxCollider.enabled = false;
+                }
             }
             bool isEnemyDead = this.isEnemyDead;
             if (isEnemyDead)
@@ -928,6 +939,7 @@ namespace SoulDev
 
         public void baseCrouching()
         {
+            if (this.agent == null) return;
             this.agent.speed = 0f;
             this.setAnimationSpeedClientRpc(1f);
             this.DoAnimationClientRpc(2);
@@ -935,6 +947,7 @@ namespace SoulDev
             Debug.Log("Crouching... timer: " + this.crouchTimer.ToString());
             this.crouchTimeout -= 0.2f;
             PlayerControllerB ply = ((this.targetPlayer != null && base.PlayerIsTargetable(this.targetPlayer, false, false)) ? this.targetPlayer : this.getNearestPlayer(true));
+            if (ply == null) return;
             bool flag = Vector3.Distance(base.transform.position, ply.transform.position) > this.maxLeapDistance;
             if (flag)
             {
@@ -2251,6 +2264,13 @@ namespace SoulDev
                 this.creatureDeath.Play();
             }
             this.isEnemyDead = true;
+            if (Plugin.disableColliderOnDeath.Value)
+            {
+                foreach (var collider in base.GetComponents<Collider>())
+                {
+                    collider.enabled = false;
+                }
+            }
         }
 
         [ServerRpc(RequireOwnership = false)]
