@@ -29,10 +29,10 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>..\..\..\Runtime dependencies (local)\\BepInEx\core\0Harmony.dll</HintPath>
+      <HintPath>..\..\..\Runtime dependencies (local)\BepInEx\core\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx">
-      <HintPath>..\..\..\Runtime dependencies (local)\\BepInEx\core\BepInEx.dll</HintPath>
+      <HintPath>..\..\..\Runtime dependencies (local)\BepInEx\core\BepInEx.dll</HintPath>
     </Reference>
     <Reference Include="LethalConfig">
       <HintPath>..\..\..\Runtime dependencies (local)\BepInEx\plugins\AinaVT-LethalConfig\LethalConfig\LethalConfig.dll</HintPath>
