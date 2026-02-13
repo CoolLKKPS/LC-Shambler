@@ -21,7 +21,7 @@ namespace Shambler
 {
     [BepInDependency("evaisa.lethallib", BepInDependency.DependencyFlags.HardDependency)]
     [BepInDependency("solidlib", BepInDependency.DependencyFlags.HardDependency)]
-    [BepInPlugin("Shambler", "Shambler", "1.0.0")]
+    [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
     public class Plugin : BaseUnityPlugin
     {
         public static void LogDebug(string text)
