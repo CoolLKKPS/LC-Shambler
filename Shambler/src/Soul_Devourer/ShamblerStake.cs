@@ -182,7 +182,10 @@ namespace Shambler.src.Soul_Devourer
             if (flag2)
             {
                 this.checkCooldown = 0f;
-                this.owner.PlayerQualifies(this.victim);
+                if (this.owner != null)
+                {
+                    this.owner.PlayerQualifies(this.victim);
+                }
             }
             bool flag3 = this.victim;
             if (flag3)
@@ -202,7 +205,7 @@ namespace Shambler.src.Soul_Devourer
             bool isHost = RoundManager.Instance.IsHost;
             if (isHost)
             {
-                bool flag5 = this.victim != null && !this.envTrigger.isBeingHeldByPlayer && this.owner.EscapingEmployees.Contains(this.victim.NetworkObject.NetworkObjectId);
+                bool flag5 = this.victim != null && !this.envTrigger.isBeingHeldByPlayer && this.owner != null && this.owner.EscapingEmployees.Contains(this.victim.NetworkObject.NetworkObjectId);
                 if (flag5)
                 {
                     this.IsFreeing = false;
@@ -278,13 +281,16 @@ namespace Shambler.src.Soul_Devourer
             }
             else
             {
-                if (this.victim == null || this.owner == null) return;
+                if (this.victim == null) return;
                 bool isPlayerDead = this.victim.isPlayerDead;
                 if (isPlayerDead)
                 {
                     this.DetachClientRpc();
                 }
-                this.owner.StakeNotify(this.victim);
+                if (this.owner != null)
+                {
+                    this.owner.StakeNotify(this.victim);
+                }
                 this.IsFreeing = false;
                 bool flag2 = UnityEngine.Random.Range(0, 100) < this.freeChance || caller.NetworkObject.NetworkObjectId != this.victim.NetworkObject.NetworkObjectId;
                 if (flag2)
@@ -316,7 +322,10 @@ namespace Shambler.src.Soul_Devourer
                         this.DmgPlayerClientRpc(this.victim.NetworkObject.NetworkObjectId, this.dmgPunishment);
                         this.PlayFailEscapeClientRpc();
                         this.updateStatsClientRpc(5, this.failBoost);
-                        this.owner.StakeUnNotify(this.victim);
+                        if (this.owner != null)
+                        {
+                            this.owner.StakeUnNotify(this.victim);
+                        }
                     }
                 }
             }
@@ -431,7 +440,7 @@ namespace Shambler.src.Soul_Devourer
                 bool flag = ply.NetworkObject.NetworkObjectId == playerid;
                 if (flag)
                 {
-                    ply.DamagePlayer(30, true, true, CauseOfDeath.Unknown, 0, false, default(Vector3));
+                    ply.DamagePlayer(30, true, true, CauseOfDeath.Stabbing, 0, false, default(Vector3));
                 }
             }
         }
@@ -632,7 +641,10 @@ namespace Shambler.src.Soul_Devourer
         public async void DelayedUnNotifLong(PlayerControllerB ply)
         {
             await Task.Delay(9000);
-            this.owner.StakeUnNotify(ply);
+            if (this.owner != null)
+            {
+                this.owner.StakeUnNotify(ply);
+            }
         }
 
         public void StartInteract()
@@ -641,7 +653,10 @@ namespace Shambler.src.Soul_Devourer
             if (isHost)
             {
                 this.IsFreeing = true;
-                this.owner.StakeNotify(this.victim);
+                if (this.owner != null)
+                {
+                    this.owner.StakeNotify(this.victim);
+                }
             }
         }
 
@@ -651,7 +666,10 @@ namespace Shambler.src.Soul_Devourer
             if (isHost)
             {
                 this.IsFreeing = false;
-                this.owner.StakeUnNotify(this.victim);
+                if (this.owner != null)
+                {
+                    this.owner.StakeUnNotify(this.victim);
+                }
             }
         }
 

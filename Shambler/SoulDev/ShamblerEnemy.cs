@@ -639,7 +639,7 @@ namespace SoulDev
                 bool flag = ply.NetworkObject.NetworkObjectId == playerid;
                 if (flag)
                 {
-                    ply.DamagePlayer(30, true, true, CauseOfDeath.Unknown, 0, false, default(Vector3));
+                    ply.DamagePlayer(amount, true, true, CauseOfDeath.Mauling, 0, false, default(Vector3));
                 }
             }
         }
@@ -917,21 +917,18 @@ namespace SoulDev
             PlayerControllerB[] players = RoundManager.Instance.playersManager.allPlayerScripts;
             foreach (PlayerControllerB ply in players)
             {
+                if (ply == this.capturedPlayer)
+                    continue;
                 bool flag = Vector3.Distance(ply.transform.position, base.transform.position) < this.captureRange;
                 if (flag)
                 {
-                    bool flag2 = ply != this.capturedPlayer;
-                    if (flag2)
-                    {
-                        this.Think("Shambler: I GOTCHA");
-                        this.capturedPlayer = ply;
-                        this.stabbedCapturedPlayer = false;
-                        this.attachPlayerClientRpc(this.capturedPlayer.NetworkObject.NetworkObjectId, false, 50);
-                        this.timeTillStab = (float)(2.0 + 30.0 * this.enemyRandom.NextDouble() * this.enemyRandom.NextDouble() * this.enemyRandom.NextDouble());
-                        this.DmgPlayerClientRpc(ply.NetworkObject.NetworkObjectId, 20);
-                        return;
-                    }
-                    this.DmgPlayerClientRpc(ply.NetworkObject.NetworkObjectId, 70);
+                    this.Think("Shambler: I GOTCHA");
+                    this.capturedPlayer = ply;
+                    this.stabbedCapturedPlayer = false;
+                    this.attachPlayerClientRpc(this.capturedPlayer.NetworkObject.NetworkObjectId, false, 50);
+                    this.timeTillStab = (float)(2.0 + 30.0 * this.enemyRandom.NextDouble() * this.enemyRandom.NextDouble() * this.enemyRandom.NextDouble());
+                    this.DmgPlayerClientRpc(ply.NetworkObject.NetworkObjectId, 30);
+                    return;
                 }
             }
             this.Think("Shambler: OHHHH I MISSED!");
@@ -2344,6 +2341,8 @@ namespace SoulDev
             }
             this.capturedPlayer = null;
             this.stabbedPlayer = null;
+            if (targetPlayer != null && !ShamblerEnemy.IsPlayerStaked(targetPlayer))
+                ShamblerEnemy.stuckPlayerIds.Remove(targetPlayer.NetworkObject.NetworkObjectId);
         }
 
         public override void OnCollideWithEnemy(Collider other, EnemyAI collidedEnemy = null)
@@ -2440,14 +2439,18 @@ namespace SoulDev
                     bool flag2 = !lastHit;
                     if (flag2)
                     {
+                        player.CancelSpecialTriggerAnimations();
                         player.transform.position = this.capturePoint.position;
                         this.capturedPlayer = player;
                     }
                     else
                     {
+                        player.CancelSpecialTriggerAnimations();
                         player.deadBody.transform.position = this.capturePoint.position;
                         this.capturedPlayer = player;
                     }
+                    if (!ShamblerEnemy.stuckPlayerIds.Contains(uid))
+                        ShamblerEnemy.stuckPlayerIds.Add(uid);
                     break;
                 }
             }
@@ -2485,6 +2488,7 @@ namespace SoulDev
                     bool flag2 = !lastHit;
                     if (flag2)
                     {
+                        player.CancelSpecialTriggerAnimations();
                         player.transform.position = this.capturePoint.position;
                         this.capturedPlayer = player;
                         bool flag3 = this.capturedPlayer != null;
@@ -2495,6 +2499,7 @@ namespace SoulDev
                     }
                     else
                     {
+                        player.CancelSpecialTriggerAnimations();
                         player.deadBody.transform.position = this.capturePoint.position;
                         this.capturedPlayer = player;
                         bool flag4 = this.capturedPlayer != null;
