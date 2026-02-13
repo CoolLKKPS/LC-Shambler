@@ -89,17 +89,17 @@ namespace SoulDev
 		public override void Start()
 		{
 			base.Start();
-			bool flag = RoundManager.Instance.IsHost && Object.FindObjectsOfType<ShamblerEnemy>().Length > Plugin.maxCount.Value;
+			bool flag = RoundManager.Instance.IsHost && UnityEngine.Object.FindObjectsOfType<ShamblerEnemy>().Length > Plugin.maxCount.Value;
 			if (flag)
 			{
-				Object.Destroy(base.gameObject);
+                UnityEngine.Object.Destroy(base.gameObject);
 				Debug.Log("Shambler: Destroyed self (enemy count too high)");
 			}
 			this.maxStabDistance = 5f * base.transform.localScale.x;
 			this.maxLeapDistance = 20f * base.transform.localScale.x;
 			this.captureRange = 5.35f * base.transform.localScale.x;
 			this.nestSpot = base.transform.position;
-			EntityWarp.mapEntrances = Object.FindObjectsOfType<EntranceTeleport>(false);
+			EntityWarp.mapEntrances = UnityEngine.Object.FindObjectsOfType<EntranceTeleport>(false);
 			this.mostRecentPlayer = this.getNearestPlayer(true);
 			this.animator = base.gameObject.GetComponent<Animator>();
 			bool isHost = RoundManager.Instance.IsHost;
@@ -111,7 +111,7 @@ namespace SoulDev
 			this.timeSinceHittingLocalPlayer = 0f;
 			this.timeSinceNewRandPos = 0f;
 			this.positionRandomness = new Vector3(0f, 0f, 0f);
-			this.enemyRandom = new Random(StartOfRound.Instance.randomMapSeed + this.thisEnemyIndex);
+			this.enemyRandom = new System.Random(StartOfRound.Instance.randomMapSeed + this.thisEnemyIndex);
 			this.isDeadAnimationDone = false;
 			this.currentBehaviourStateIndex = 0;
 			base.StartSearch(base.transform.position, null);
@@ -532,7 +532,7 @@ namespace SoulDev
 			}
 			if (this.__rpc_exec_stage != NetworkBehaviour.__RpcExecStage.Execute && (networkManager.IsServer || networkManager.IsHost))
 			{
-				ClientRpcParams clientRpcParams;
+				ClientRpcParams clientRpcParams = default;
 				FastBufferWriter fastBufferWriter = base.__beginSendClientRpc(2925436343U, clientRpcParams, RpcDelivery.Reliable);
 				BytePacker.WriteValueBitPacked(fastBufferWriter, playerid);
 				fastBufferWriter.WriteValueSafe<bool>(in reset, default(FastBufferWriter.ForPrimitives));
@@ -570,7 +570,7 @@ namespace SoulDev
 			}
 			if (this.__rpc_exec_stage != NetworkBehaviour.__RpcExecStage.Execute && (networkManager.IsServer || networkManager.IsHost))
 			{
-				ClientRpcParams clientRpcParams;
+				ClientRpcParams clientRpcParams = default;
 				FastBufferWriter fastBufferWriter = base.__beginSendClientRpc(3110006365U, clientRpcParams, RpcDelivery.Reliable);
 				BytePacker.WriteValueBitPacked(fastBufferWriter, playerid);
 				fastBufferWriter.WriteValueSafe<bool>(in reset, default(FastBufferWriter.ForPrimitives));
@@ -608,7 +608,7 @@ namespace SoulDev
 			}
 			if (this.__rpc_exec_stage != NetworkBehaviour.__RpcExecStage.Execute && (networkManager.IsServer || networkManager.IsHost))
 			{
-				ClientRpcParams clientRpcParams;
+				ClientRpcParams clientRpcParams = default;
 				FastBufferWriter fastBufferWriter = base.__beginSendClientRpc(3897930302U, clientRpcParams, RpcDelivery.Reliable);
 				BytePacker.WriteValueBitPacked(fastBufferWriter, playerid);
 				BytePacker.WriteValueBitPacked(fastBufferWriter, amount);
@@ -851,7 +851,7 @@ namespace SoulDev
 			}
 			if (this.__rpc_exec_stage != NetworkBehaviour.__RpcExecStage.Execute && (networkManager.IsServer || networkManager.IsHost))
 			{
-				ClientRpcParams clientRpcParams;
+				ClientRpcParams clientRpcParams = default;
 				FastBufferWriter fastBufferWriter = base.__beginSendClientRpc(2556090093U, clientRpcParams, RpcDelivery.Reliable);
 				fastBufferWriter.WriteValueSafe(in targetPos);
 				fastBufferWriter.WriteValueSafe(in shamblerStartPos);
@@ -1202,8 +1202,8 @@ namespace SoulDev
 					Vector3 pPos = ply.transform.position;
 					Vector3 pFwd = ply.transform.forward;
 					Vector3 pRight = ply.transform.right;
-					PlayerControllerB watcher;
-					float gazeAlign;
+					PlayerControllerB watcher = null;
+					float gazeAlign = 0f;
 					bool flag3 = sneaking && this.spottedCooldown <= 0f && this.TryGetMostDangerousViewer(out watcher, out gazeAlign);
 					if (flag3)
 					{
@@ -1241,7 +1241,7 @@ namespace SoulDev
 							}
 						}
 					}
-					Vector3 coverVsTarget;
+					Vector3 coverVsTarget = default;
 					bool flag8 = sneaking && this.TryFindCoverAgainstPlayer(ply, pPos, 18f, 1.1f, out coverVsTarget);
 					if (flag8)
 					{
@@ -1251,7 +1251,7 @@ namespace SoulDev
 					}
 					else
 					{
-						Vector3 groupCover;
+						Vector3 groupCover = default;
 						bool flag9 = sneaking && this.TryFindGroupCover(pPos, 1.1f, 14f, 3, 16, out groupCover);
 						if (flag9)
 						{
@@ -1281,7 +1281,7 @@ namespace SoulDev
 							{
 								List<Vector3> list = candidates;
 								int num = i;
-								list[num] += new Vector3(Random.Range(-0.75f, 0.75f), 0f, Random.Range(-0.75f, 0.75f));
+								list[num] += new Vector3(UnityEngine.Random.Range(-0.75f, 0.75f), 0f, UnityEngine.Random.Range(-0.75f, 0.75f));
 							}
 							float bestScore = float.NegativeInfinity;
 							Vector3 bestPos = base.transform.position;
@@ -1326,7 +1326,7 @@ namespace SoulDev
 								bool flag14 = j.sqrMagnitude > 0.01f;
 								if (flag14)
 								{
-									j = Quaternion.AngleAxis(20f * ((Random.value > 0.5f) ? 1f : (-1f)), Vector3.up) * j.normalized * 4f;
+									j = Quaternion.AngleAxis(20f * ((UnityEngine.Random.value > 0.5f) ? 1f : (-1f)), Vector3.up) * j.normalized * 4f;
 									bool flag15 = !this.TrySampleNavmesh(base.transform.position + j, 6f, out bestPos, -1);
 									if (flag15)
 									{
@@ -1412,17 +1412,14 @@ namespace SoulDev
 
 		private Vector3[] BuildPointsForCandidate(Vector3 candidatePos, PlayerControllerB ply)
 		{
-			ShamblerEnemy.<>c__DisplayClass132_0 CS$<>8__locals1;
-			CS$<>8__locals1.candidatePos = candidatePos;
-			Vector3 eye = ((ply != null && ply.playerEye != null) ? ply.playerEye.transform.position : ((ply != null) ? (ply.transform.position + Vector3.up * 1.6f) : (CS$<>8__locals1.candidatePos + Vector3.up * 1.6f)));
-			CS$<>8__locals1.fwd = (CS$<>8__locals1.candidatePos - eye).normalized;
-			bool flag = CS$<>8__locals1.fwd.sqrMagnitude < 0.0001f;
-			if (flag)
+			Vector3 eye = ((ply != null && ply.playerEye != null) ? ply.playerEye.transform.position : ((ply != null) ? (ply.transform.position + Vector3.up * 1.6f) : (candidatePos + Vector3.up * 1.6f)));
+			Vector3 fwd = (candidatePos - eye).normalized;
+			if (fwd.sqrMagnitude < 0.0001f)
 			{
-				CS$<>8__locals1.fwd = Vector3.forward;
+				fwd = Vector3.forward;
 			}
-			CS$<>8__locals1.right = Vector3.Cross(Vector3.up, CS$<>8__locals1.fwd).normalized;
-			CS$<>8__locals1.up = Vector3.Cross(CS$<>8__locals1.fwd, CS$<>8__locals1.right).normalized;
+			Vector3 right = Vector3.Cross(Vector3.up, fwd).normalized;
+			Vector3 up = Vector3.Cross(fwd, right).normalized;
 			Vector3 lFoot = (this.footLCol ? this.footLCol.localPosition : new Vector3(-0.25f, 0.1f, 0f));
 			Vector3 rFoot = (this.footRCol ? this.footRCol.localPosition : new Vector3(0.25f, 0.1f, 0f));
 			Vector3 lArm = (this.armLCol ? this.armLCol.localPosition : new Vector3(-0.45f, 1.2f, 0f));
@@ -1430,11 +1427,11 @@ namespace SoulDev
 			Vector3 head = (this.headCol ? this.headCol.localPosition : new Vector3(0f, 1.7f, 0f));
 			return new Vector3[]
 			{
-				ShamblerEnemy.<BuildPointsForCandidate>g__ToWorld|132_0(lFoot, ref CS$<>8__locals1),
-				ShamblerEnemy.<BuildPointsForCandidate>g__ToWorld|132_0(rFoot, ref CS$<>8__locals1),
-				ShamblerEnemy.<BuildPointsForCandidate>g__ToWorld|132_0(lArm, ref CS$<>8__locals1),
-				ShamblerEnemy.<BuildPointsForCandidate>g__ToWorld|132_0(rArm, ref CS$<>8__locals1),
-				ShamblerEnemy.<BuildPointsForCandidate>g__ToWorld|132_0(head, ref CS$<>8__locals1)
+				candidatePos + right * lFoot.x + up * lFoot.y + fwd * lFoot.z,
+				candidatePos + right * rFoot.x + up * rFoot.y + fwd * rFoot.z,
+				candidatePos + right * lArm.x + up * lArm.y + fwd * lArm.z,
+				candidatePos + right * rArm.x + up * rArm.y + fwd * rArm.z,
+				candidatePos + right * head.x + up * head.y + fwd * head.z
 			};
 		}
 
@@ -1850,7 +1847,7 @@ namespace SoulDev
 				if (isHost)
 				{
 					GameObject stakePrefab = Plugin.ShamblerStakePrefab;
-					GameObject stake = Object.Instantiate<GameObject>(stakePrefab, this.heldStakeRef.transform.position, this.heldStakeRef.transform.rotation);
+					GameObject stake = UnityEngine.Object.Instantiate<GameObject>(stakePrefab, this.heldStakeRef.transform.position, this.heldStakeRef.transform.rotation);
 					ShamblerStake obj = stake.GetComponent<ShamblerStake>();
 					NetworkObject netObj = stake.GetComponent<NetworkObject>();
 					obj.owner = this;
@@ -2229,7 +2226,7 @@ namespace SoulDev
 			}
 			if (this.__rpc_exec_stage != NetworkBehaviour.__RpcExecStage.Execute && (networkManager.IsServer || networkManager.IsHost))
 			{
-				ClientRpcParams clientRpcParams;
+				ClientRpcParams clientRpcParams = default;
 				FastBufferWriter fastBufferWriter = base.__beginSendClientRpc(2229496956U, clientRpcParams, RpcDelivery.Reliable);
 				base.__endSendClientRpc(ref fastBufferWriter, 2229496956U, clientRpcParams, RpcDelivery.Reliable);
 			}
@@ -2257,7 +2254,7 @@ namespace SoulDev
 			}
 			if (this.__rpc_exec_stage != NetworkBehaviour.__RpcExecStage.Execute && (networkManager.IsClient || networkManager.IsHost))
 			{
-				ServerRpcParams serverRpcParams;
+				ServerRpcParams serverRpcParams = default;
 				FastBufferWriter fastBufferWriter = base.__beginSendServerRpc(2192772121U, serverRpcParams, RpcDelivery.Reliable);
 				BytePacker.WriteValueBitPacked(fastBufferWriter, playerId);
 				base.__endSendServerRpc(ref fastBufferWriter, 2192772121U, serverRpcParams, RpcDelivery.Reliable);
@@ -2280,7 +2277,7 @@ namespace SoulDev
 			}
 			if (this.__rpc_exec_stage != NetworkBehaviour.__RpcExecStage.Execute && (networkManager.IsServer || networkManager.IsHost))
 			{
-				ClientRpcParams clientRpcParams;
+				ClientRpcParams clientRpcParams = default;
 				FastBufferWriter fastBufferWriter = base.__beginSendClientRpc(160126077U, clientRpcParams, RpcDelivery.Reliable);
 				BytePacker.WriteValueBitPacked(fastBufferWriter, playerId);
 				base.__endSendClientRpc(ref fastBufferWriter, 160126077U, clientRpcParams, RpcDelivery.Reliable);
@@ -2367,7 +2364,7 @@ namespace SoulDev
 			}
 			if (this.__rpc_exec_stage != NetworkBehaviour.__RpcExecStage.Execute && (networkManager.IsClient || networkManager.IsHost))
 			{
-				ServerRpcParams serverRpcParams;
+				ServerRpcParams serverRpcParams = default;
 				FastBufferWriter fastBufferWriter = base.__beginSendServerRpc(836769684U, serverRpcParams, RpcDelivery.Reliable);
 				BytePacker.WriteValueBitPacked(fastBufferWriter, uid);
 				fastBufferWriter.WriteValueSafe<bool>(in lastHit, default(FastBufferWriter.ForPrimitives));
@@ -2392,7 +2389,7 @@ namespace SoulDev
 			}
 			if (this.__rpc_exec_stage != NetworkBehaviour.__RpcExecStage.Execute && (networkManager.IsServer || networkManager.IsHost))
 			{
-				ClientRpcParams clientRpcParams;
+				ClientRpcParams clientRpcParams = default;
 				FastBufferWriter fastBufferWriter = base.__beginSendClientRpc(1109110496U, clientRpcParams, RpcDelivery.Reliable);
 				BytePacker.WriteValueBitPacked(fastBufferWriter, uid);
 				fastBufferWriter.WriteValueSafe<bool>(in lastHit, default(FastBufferWriter.ForPrimitives));
@@ -2437,7 +2434,7 @@ namespace SoulDev
 			}
 			if (this.__rpc_exec_stage != NetworkBehaviour.__RpcExecStage.Execute && (networkManager.IsServer || networkManager.IsHost))
 			{
-				ClientRpcParams clientRpcParams;
+				ClientRpcParams clientRpcParams = default;
 				FastBufferWriter fastBufferWriter = base.__beginSendClientRpc(2790292547U, clientRpcParams, RpcDelivery.Reliable);
 				BytePacker.WriteValueBitPacked(fastBufferWriter, uid);
 				fastBufferWriter.WriteValueSafe<bool>(in lastHit, default(FastBufferWriter.ForPrimitives));
@@ -2492,7 +2489,7 @@ namespace SoulDev
 			}
 			if (this.__rpc_exec_stage != NetworkBehaviour.__RpcExecStage.Execute && (networkManager.IsServer || networkManager.IsHost))
 			{
-				ClientRpcParams clientRpcParams;
+				ClientRpcParams clientRpcParams = default;
 				FastBufferWriter fastBufferWriter = base.__beginSendClientRpc(1314365859U, clientRpcParams, RpcDelivery.Reliable);
 				BytePacker.WriteValueBitPacked(fastBufferWriter, playerid);
 				fastBufferWriter.WriteValueSafe<bool>(in value, default(FastBufferWriter.ForPrimitives));
@@ -2537,7 +2534,7 @@ namespace SoulDev
 			}
 			if (this.__rpc_exec_stage != NetworkBehaviour.__RpcExecStage.Execute && (networkManager.IsServer || networkManager.IsHost))
 			{
-				ClientRpcParams clientRpcParams;
+				ClientRpcParams clientRpcParams = default;
 				FastBufferWriter fastBufferWriter = base.__beginSendClientRpc(1531827138U, clientRpcParams, RpcDelivery.Reliable);
 				bool flag = soundName != null;
 				fastBufferWriter.WriteValueSafe<bool>(in flag, default(FastBufferWriter.ForPrimitives));
@@ -2552,7 +2549,7 @@ namespace SoulDev
 				return;
 			}
 			this.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
-			uint num = <PrivateImplementationDetails>.ComputeStringHash(soundName);
+			uint num = PrivateImplementationDetails.ComputeStringHash(soundName);
 			if (num <= 1359779715U)
 			{
 				if (num <= 606747055U)
@@ -2626,7 +2623,7 @@ namespace SoulDev
 				{
 					this.stopAllSound();
 					double[] timeIntervals = new double[] { 0.0, 0.8244, 11.564, 29.11, 34.491, 37.84, 48.689, 64.518, 89.535, 92.111 };
-					int selectedTime = Random.Range(0, timeIntervals.Length);
+					int selectedTime = UnityEngine.Random.Range(0, timeIntervals.Length);
 					this.creatureVoice.Play();
 					this.creatureVoice.SetScheduledStartTime(timeIntervals[selectedTime]);
 					this.creatureVoice.time = (float)timeIntervals[selectedTime];
@@ -2672,7 +2669,7 @@ namespace SoulDev
 			}
 			if (this.__rpc_exec_stage != NetworkBehaviour.__RpcExecStage.Execute && (networkManager.IsServer || networkManager.IsHost))
 			{
-				ClientRpcParams clientRpcParams;
+				ClientRpcParams clientRpcParams = default;
 				FastBufferWriter fastBufferWriter = base.__beginSendClientRpc(2582106502U, clientRpcParams, RpcDelivery.Reliable);
 				fastBufferWriter.WriteValueSafe<float>(in speed, default(FastBufferWriter.ForPrimitives));
 				base.__endSendClientRpc(ref fastBufferWriter, 2582106502U, clientRpcParams, RpcDelivery.Reliable);
@@ -2695,7 +2692,7 @@ namespace SoulDev
 			}
 			if (this.__rpc_exec_stage != NetworkBehaviour.__RpcExecStage.Execute && (networkManager.IsServer || networkManager.IsHost))
 			{
-				ClientRpcParams clientRpcParams;
+				ClientRpcParams clientRpcParams = default;
 				FastBufferWriter fastBufferWriter = base.__beginSendClientRpc(1163343604U, clientRpcParams, RpcDelivery.Reliable);
 				BytePacker.WriteValueBitPacked(fastBufferWriter, index);
 				base.__endSendClientRpc(ref fastBufferWriter, 1163343604U, clientRpcParams, RpcDelivery.Reliable);
@@ -2722,7 +2719,7 @@ namespace SoulDev
 			}
 			if (this.__rpc_exec_stage != NetworkBehaviour.__RpcExecStage.Execute && (networkManager.IsServer || networkManager.IsHost))
 			{
-				ClientRpcParams clientRpcParams;
+				ClientRpcParams clientRpcParams = default;
 				FastBufferWriter fastBufferWriter = base.__beginSendClientRpc(3587374905U, clientRpcParams, RpcDelivery.Reliable);
 				bool flag = name != null;
 				fastBufferWriter.WriteValueSafe<bool>(in flag, default(FastBufferWriter.ForPrimitives));
@@ -2740,11 +2737,7 @@ namespace SoulDev
 			this.animator.Play(name);
 		}
 
-		[CompilerGenerated]
-		internal static Vector3 <BuildPointsForCandidate>g__ToWorld|132_0(Vector3 lp, ref ShamblerEnemy.<>c__DisplayClass132_0 A_1)
-		{
-			return A_1.candidatePos + A_1.right * lp.x + A_1.up * lp.y + A_1.fwd * lp.z;
-		}
+
 
 		protected override void __initializeVariables()
 		{
@@ -2782,9 +2775,9 @@ namespace SoulDev
 			ByteUnpacker.ReadValueBitPacked(reader, out num);
 			bool flag;
 			reader.ReadValueSafe<bool>(out flag, default(FastBufferWriter.ForPrimitives));
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
+			((ShamblerEnemy)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
 			((ShamblerEnemy)target).SetCapturedPlayerClientRpc(num, flag);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
+			((ShamblerEnemy)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
 		}
 
 		private static void __rpc_handler_3110006365(NetworkBehaviour target, FastBufferReader reader, __RpcParams rpcParams)
@@ -2798,9 +2791,9 @@ namespace SoulDev
 			ByteUnpacker.ReadValueBitPacked(reader, out num);
 			bool flag;
 			reader.ReadValueSafe<bool>(out flag, default(FastBufferWriter.ForPrimitives));
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
+			((ShamblerEnemy)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
 			((ShamblerEnemy)target).SetStabbedPlayerClientRpc(num, flag);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
+			((ShamblerEnemy)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
 		}
 
 		private static void __rpc_handler_3897930302(NetworkBehaviour target, FastBufferReader reader, __RpcParams rpcParams)
@@ -2814,9 +2807,9 @@ namespace SoulDev
 			ByteUnpacker.ReadValueBitPacked(reader, out num);
 			int num2;
 			ByteUnpacker.ReadValueBitPacked(reader, out num2);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
+			((ShamblerEnemy)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
 			((ShamblerEnemy)target).DmgPlayerClientRpc(num, num2);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
+			((ShamblerEnemy)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
 		}
 
 		private static void __rpc_handler_2556090093(NetworkBehaviour target, FastBufferReader reader, __RpcParams rpcParams)
@@ -2830,9 +2823,9 @@ namespace SoulDev
 			reader.ReadValueSafe(out vector);
 			Vector3 vector2;
 			reader.ReadValueSafe(out vector2);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
+			((ShamblerEnemy)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
 			((ShamblerEnemy)target).DoGroundHopClientRpc(vector, vector2);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
+			((ShamblerEnemy)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
 		}
 
 		private static void __rpc_handler_2229496956(NetworkBehaviour target, FastBufferReader reader, __RpcParams rpcParams)
@@ -2842,9 +2835,9 @@ namespace SoulDev
 			{
 				return;
 			}
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
+			((ShamblerEnemy)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
 			((ShamblerEnemy)target).deadEventClientRpc();
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
+			((ShamblerEnemy)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
 		}
 
 		private static void __rpc_handler_2192772121(NetworkBehaviour target, FastBufferReader reader, __RpcParams rpcParams)
@@ -2856,9 +2849,9 @@ namespace SoulDev
 			}
 			ulong num;
 			ByteUnpacker.ReadValueBitPacked(reader, out num);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
+			((ShamblerEnemy)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
 			((ShamblerEnemy)target).letGoOfPlayerServerRpc(num);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
+			((ShamblerEnemy)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
 		}
 
 		private static void __rpc_handler_160126077(NetworkBehaviour target, FastBufferReader reader, __RpcParams rpcParams)
@@ -2870,9 +2863,9 @@ namespace SoulDev
 			}
 			ulong num;
 			ByteUnpacker.ReadValueBitPacked(reader, out num);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
+			((ShamblerEnemy)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
 			((ShamblerEnemy)target).letGoOfPlayerClientRpc(num);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
+			((ShamblerEnemy)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
 		}
 
 		private static void __rpc_handler_836769684(NetworkBehaviour target, FastBufferReader reader, __RpcParams rpcParams)
@@ -2888,9 +2881,9 @@ namespace SoulDev
 			reader.ReadValueSafe<bool>(out flag, default(FastBufferWriter.ForPrimitives));
 			int num2;
 			ByteUnpacker.ReadValueBitPacked(reader, out num2);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
+			((ShamblerEnemy)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
 			((ShamblerEnemy)target).attachPlayerServerRpc(num, flag, num2);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
+			((ShamblerEnemy)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
 		}
 
 		private static void __rpc_handler_1109110496(NetworkBehaviour target, FastBufferReader reader, __RpcParams rpcParams)
@@ -2906,9 +2899,9 @@ namespace SoulDev
 			reader.ReadValueSafe<bool>(out flag, default(FastBufferWriter.ForPrimitives));
 			int num2;
 			ByteUnpacker.ReadValueBitPacked(reader, out num2);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
+			((ShamblerEnemy)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
 			((ShamblerEnemy)target).attachPlayerClientRpc(num, flag, num2);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
+			((ShamblerEnemy)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
 		}
 
 		private static void __rpc_handler_2790292547(NetworkBehaviour target, FastBufferReader reader, __RpcParams rpcParams)
@@ -2924,9 +2917,9 @@ namespace SoulDev
 			reader.ReadValueSafe<bool>(out flag, default(FastBufferWriter.ForPrimitives));
 			int num2;
 			ByteUnpacker.ReadValueBitPacked(reader, out num2);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
+			((ShamblerEnemy)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
 			((ShamblerEnemy)target).attachPlayerSpikeClientRpc(num, flag, num2);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
+			((ShamblerEnemy)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
 		}
 
 		private static void __rpc_handler_1314365859(NetworkBehaviour target, FastBufferReader reader, __RpcParams rpcParams)
@@ -2940,9 +2933,9 @@ namespace SoulDev
 			ByteUnpacker.ReadValueBitPacked(reader, out num);
 			bool flag;
 			reader.ReadValueSafe<bool>(out flag, default(FastBufferWriter.ForPrimitives));
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
+			((ShamblerEnemy)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
 			((ShamblerEnemy)target).SetColliderClientRpc(num, flag);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
+			((ShamblerEnemy)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
 		}
 
 		private static void __rpc_handler_1531827138(NetworkBehaviour target, FastBufferReader reader, __RpcParams rpcParams)
@@ -2959,9 +2952,9 @@ namespace SoulDev
 			{
 				reader.ReadValueSafe(out text, false);
 			}
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
+			((ShamblerEnemy)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
 			((ShamblerEnemy)target).moaiSoundPlayClientRpc(text);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
+			((ShamblerEnemy)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
 		}
 
 		private static void __rpc_handler_2582106502(NetworkBehaviour target, FastBufferReader reader, __RpcParams rpcParams)
@@ -2973,9 +2966,9 @@ namespace SoulDev
 			}
 			float num;
 			reader.ReadValueSafe<float>(out num, default(FastBufferWriter.ForPrimitives));
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
+			((ShamblerEnemy)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
 			((ShamblerEnemy)target).setAnimationSpeedClientRpc(num);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
+			((ShamblerEnemy)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
 		}
 
 		private static void __rpc_handler_1163343604(NetworkBehaviour target, FastBufferReader reader, __RpcParams rpcParams)
@@ -2987,9 +2980,9 @@ namespace SoulDev
 			}
 			int num;
 			ByteUnpacker.ReadValueBitPacked(reader, out num);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
+			((ShamblerEnemy)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
 			((ShamblerEnemy)target).DoAnimationClientRpc(num);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
+			((ShamblerEnemy)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
 		}
 
 		private static void __rpc_handler_3587374905(NetworkBehaviour target, FastBufferReader reader, __RpcParams rpcParams)
@@ -3006,12 +2999,12 @@ namespace SoulDev
 			{
 				reader.ReadValueSafe(out text, false);
 			}
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
+			((ShamblerEnemy)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
 			((ShamblerEnemy)target).animPlayClientRpc(text);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
+			((ShamblerEnemy)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
 		}
 
-		protected internal override string __getTypeName()
+		protected override string __getTypeName()
 		{
 			return "ShamblerEnemy";
 		}
@@ -3062,7 +3055,7 @@ namespace SoulDev
 
 		protected Vector3 StalkPos;
 
-		protected Random enemyRandom;
+		protected System.Random enemyRandom;
 
 		protected bool isDeadAnimationDone;
 
@@ -3239,6 +3232,19 @@ namespace SoulDev
 			HeadingToNest,
 			PlantingStake,
 			SneakyStab
+		}
+	}
+
+	internal static class PrivateImplementationDetails
+	{
+		internal static uint ComputeStringHash(string s)
+		{
+			uint hash = 2166136261;
+			foreach (byte b in System.Text.Encoding.UTF8.GetBytes(s))
+			{
+				hash = (hash ^ b) * 16777619;
+			}
+			return hash;
 		}
 	}
 }

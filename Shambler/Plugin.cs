@@ -55,7 +55,7 @@ namespace Shambler
 					}
 				}
 			}
-			Random.InitState((int)DateTime.Now.Ticks);
+			UnityEngine.Random.InitState((int)DateTime.Now.Ticks);
 			try
 			{
 				string targetAssetName = "Shambler";
@@ -103,12 +103,12 @@ namespace Shambler
 				{
 					try
 					{
-						foreach (ShamblerStake stake in Object.FindObjectsOfType<ShamblerStake>())
+						foreach (ShamblerStake stake in UnityEngine.Object.FindObjectsOfType<ShamblerStake>())
 						{
 							bool flag2 = stake.gameObject;
 							if (flag2)
 							{
-								Object.Destroy(stake.gameObject);
+                                UnityEngine.Object.Destroy(stake.gameObject);
 							}
 						}
 					}
@@ -185,7 +185,7 @@ namespace Shambler
 
 		public bool PlayerAttachedToShamblerOrStake(global::GameNetcodeStuff.PlayerControllerB ply)
 		{
-			ShamblerEnemy[] shamblers = Object.FindObjectsOfType<ShamblerEnemy>();
+			ShamblerEnemy[] shamblers = UnityEngine.Object.FindObjectsOfType<ShamblerEnemy>();
 			ShamblerEnemy[] array = shamblers;
 			int i = 0;
 			while (i < array.Length)
@@ -209,7 +209,7 @@ namespace Shambler
 				}
 				return flag2;
 			}
-			ShamblerStake[] stakes = Object.FindObjectsOfType<ShamblerStake>();
+			ShamblerStake[] stakes = UnityEngine.Object.FindObjectsOfType<ShamblerStake>();
 			foreach (ShamblerStake stake in stakes)
 			{
 				bool flag4 = stake.victim && stake.victim.NetworkObject.NetworkObjectId == ply.NetworkObject.NetworkObjectId;
@@ -224,15 +224,15 @@ namespace Shambler
 		public async void LateCleanupClient()
 		{
 			await Task.Delay(5000);
-			foreach (ShamblerStake stake in Object.FindObjectsOfType<ShamblerStake>())
+			foreach (ShamblerStake stake in UnityEngine.Object.FindObjectsOfType<ShamblerStake>())
 			{
 				if (stake.gameObject)
 				{
-					Object.Destroy(stake.gameObject);
+                    UnityEngine.Object.Destroy(stake.gameObject);
 				}
-				stake = null;
+
 			}
-			ShamblerStake[] array = null;
+
 		}
 
 		public static string ScaleAllIntegers(string input, float multiplier)

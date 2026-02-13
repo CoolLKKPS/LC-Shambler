@@ -35,7 +35,7 @@ namespace Shambler.src.Soul_Devourer
 			}
 			if (this.__rpc_exec_stage != NetworkBehaviour.__RpcExecStage.Execute && (networkManager.IsServer || networkManager.IsHost))
 			{
-				ClientRpcParams clientRpcParams;
+				ClientRpcParams clientRpcParams = default;
 				FastBufferWriter fastBufferWriter = base.__beginSendClientRpc(172827685U, clientRpcParams, RpcDelivery.Reliable);
 				fastBufferWriter.WriteValueSafe(in pos);
 				base.__endSendClientRpc(ref fastBufferWriter, 172827685U, clientRpcParams, RpcDelivery.Reliable);
@@ -76,7 +76,7 @@ namespace Shambler.src.Soul_Devourer
 			}
 			if (this.__rpc_exec_stage != NetworkBehaviour.__RpcExecStage.Execute && (networkManager.IsServer || networkManager.IsHost))
 			{
-				ClientRpcParams clientRpcParams;
+				ClientRpcParams clientRpcParams = default;
 				FastBufferWriter fastBufferWriter = base.__beginSendClientRpc(2061572526U, clientRpcParams, RpcDelivery.Reliable);
 				base.__endSendClientRpc(ref fastBufferWriter, 2061572526U, clientRpcParams, RpcDelivery.Reliable);
 			}
@@ -133,7 +133,7 @@ namespace Shambler.src.Soul_Devourer
 			}
 			if (this.__rpc_exec_stage != NetworkBehaviour.__RpcExecStage.Execute && (networkManager.IsServer || networkManager.IsHost))
 			{
-				ClientRpcParams clientRpcParams;
+				ClientRpcParams clientRpcParams = default;
 				FastBufferWriter fastBufferWriter = base.__beginSendClientRpc(4254107206U, clientRpcParams, RpcDelivery.Reliable);
 				BytePacker.WriteValueBitPacked(fastBufferWriter, playerid);
 				base.__endSendClientRpc(ref fastBufferWriter, 4254107206U, clientRpcParams, RpcDelivery.Reliable);
@@ -243,7 +243,7 @@ namespace Shambler.src.Soul_Devourer
 			}
 			if (this.__rpc_exec_stage != NetworkBehaviour.__RpcExecStage.Execute && (networkManager.IsServer || networkManager.IsHost))
 			{
-				ClientRpcParams clientRpcParams;
+				ClientRpcParams clientRpcParams = default;
 				FastBufferWriter fastBufferWriter = base.__beginSendClientRpc(423408505U, clientRpcParams, RpcDelivery.Reliable);
 				base.__endSendClientRpc(ref fastBufferWriter, 423408505U, clientRpcParams, RpcDelivery.Reliable);
 			}
@@ -281,7 +281,7 @@ namespace Shambler.src.Soul_Devourer
 				}
 				this.owner.StakeNotify(this.victim);
 				this.IsFreeing = false;
-				bool flag2 = Random.RandomRangeInt(0, 100) < this.freeChance || caller.NetworkObject.NetworkObjectId != this.victim.NetworkObject.NetworkObjectId;
+				bool flag2 = UnityEngine.Random.Range(0, 100) < this.freeChance || caller.NetworkObject.NetworkObjectId != this.victim.NetworkObject.NetworkObjectId;
 				if (flag2)
 				{
 					bool flag3 = this.victim;
@@ -339,7 +339,7 @@ namespace Shambler.src.Soul_Devourer
 			}
 			if (this.__rpc_exec_stage != NetworkBehaviour.__RpcExecStage.Execute && (networkManager.IsServer || networkManager.IsHost))
 			{
-				ClientRpcParams clientRpcParams;
+				ClientRpcParams clientRpcParams = default;
 				FastBufferWriter fastBufferWriter = base.__beginSendClientRpc(772911773U, clientRpcParams, RpcDelivery.Reliable);
 				BytePacker.WriteValueBitPacked(fastBufferWriter, playerid);
 				fastBufferWriter.WriteValueSafe(in pos);
@@ -373,7 +373,7 @@ namespace Shambler.src.Soul_Devourer
 			}
 			if (this.__rpc_exec_stage != NetworkBehaviour.__RpcExecStage.Execute && (networkManager.IsServer || networkManager.IsHost))
 			{
-				ClientRpcParams clientRpcParams;
+				ClientRpcParams clientRpcParams = default;
 				FastBufferWriter fastBufferWriter = base.__beginSendClientRpc(4142245935U, clientRpcParams, RpcDelivery.Reliable);
 				BytePacker.WriteValueBitPacked(fastBufferWriter, dmgPunishmentChange);
 				BytePacker.WriteValueBitPacked(fastBufferWriter, freeChanceChange);
@@ -408,7 +408,7 @@ namespace Shambler.src.Soul_Devourer
 			}
 			if (this.__rpc_exec_stage != NetworkBehaviour.__RpcExecStage.Execute && (networkManager.IsServer || networkManager.IsHost))
 			{
-				ClientRpcParams clientRpcParams;
+				ClientRpcParams clientRpcParams = default;
 				FastBufferWriter fastBufferWriter = base.__beginSendClientRpc(515288598U, clientRpcParams, RpcDelivery.Reliable);
 				BytePacker.WriteValueBitPacked(fastBufferWriter, playerid);
 				BytePacker.WriteValueBitPacked(fastBufferWriter, amount);
@@ -441,7 +441,7 @@ namespace Shambler.src.Soul_Devourer
 			}
 			if (this.__rpc_exec_stage != NetworkBehaviour.__RpcExecStage.Execute && (networkManager.IsServer || networkManager.IsHost))
 			{
-				ClientRpcParams clientRpcParams;
+				ClientRpcParams clientRpcParams = default;
 				FastBufferWriter fastBufferWriter = base.__beginSendClientRpc(320229780U, clientRpcParams, RpcDelivery.Reliable);
 				bool flag = tip != null;
 				fastBufferWriter.WriteValueSafe<bool>(in flag, default(FastBufferWriter.ForPrimitives));
@@ -469,7 +469,7 @@ namespace Shambler.src.Soul_Devourer
 			}
 			if (this.__rpc_exec_stage != NetworkBehaviour.__RpcExecStage.Execute && (networkManager.IsServer || networkManager.IsHost))
 			{
-				ClientRpcParams clientRpcParams;
+				ClientRpcParams clientRpcParams = default;
 				FastBufferWriter fastBufferWriter = base.__beginSendClientRpc(3261615666U, clientRpcParams, RpcDelivery.Reliable);
 				base.__endSendClientRpc(ref fastBufferWriter, 3261615666U, clientRpcParams, RpcDelivery.Reliable);
 			}
@@ -491,7 +491,7 @@ namespace Shambler.src.Soul_Devourer
 			}
 			if (this.__rpc_exec_stage != NetworkBehaviour.__RpcExecStage.Execute && (networkManager.IsServer || networkManager.IsHost))
 			{
-				ClientRpcParams clientRpcParams;
+				ClientRpcParams clientRpcParams = default;
 				FastBufferWriter fastBufferWriter = base.__beginSendClientRpc(1210762366U, clientRpcParams, RpcDelivery.Reliable);
 				BytePacker.WriteValueBitPacked(fastBufferWriter, playerid);
 				base.__endSendClientRpc(ref fastBufferWriter, 1210762366U, clientRpcParams, RpcDelivery.Reliable);
@@ -525,7 +525,7 @@ namespace Shambler.src.Soul_Devourer
 			}
 			if (this.__rpc_exec_stage != NetworkBehaviour.__RpcExecStage.Execute && (networkManager.IsServer || networkManager.IsHost))
 			{
-				ClientRpcParams clientRpcParams;
+				ClientRpcParams clientRpcParams = default;
 				FastBufferWriter fastBufferWriter = base.__beginSendClientRpc(3271024941U, clientRpcParams, RpcDelivery.Reliable);
 				BytePacker.WriteValueBitPacked(fastBufferWriter, playerid);
 				fastBufferWriter.WriteValueSafe<bool>(in value, default(FastBufferWriter.ForPrimitives));
@@ -557,7 +557,7 @@ namespace Shambler.src.Soul_Devourer
 			}
 			if (this.__rpc_exec_stage != NetworkBehaviour.__RpcExecStage.Execute && (networkManager.IsClient || networkManager.IsHost))
 			{
-				ServerRpcParams serverRpcParams;
+				ServerRpcParams serverRpcParams = default;
 				FastBufferWriter fastBufferWriter = base.__beginSendServerRpc(3534838218U, serverRpcParams, RpcDelivery.Reliable);
 				BytePacker.WriteValueBitPacked(fastBufferWriter, playerid);
 				base.__endSendServerRpc(ref fastBufferWriter, 3534838218U, serverRpcParams, RpcDelivery.Reliable);
@@ -590,7 +590,7 @@ namespace Shambler.src.Soul_Devourer
 			}
 			if (this.__rpc_exec_stage != NetworkBehaviour.__RpcExecStage.Execute && (networkManager.IsServer || networkManager.IsHost))
 			{
-				ClientRpcParams clientRpcParams;
+				ClientRpcParams clientRpcParams = default;
 				FastBufferWriter fastBufferWriter = base.__beginSendClientRpc(353136177U, clientRpcParams, RpcDelivery.Reliable);
 				base.__endSendClientRpc(ref fastBufferWriter, 353136177U, clientRpcParams, RpcDelivery.Reliable);
 			}
@@ -612,7 +612,7 @@ namespace Shambler.src.Soul_Devourer
 			}
 			if (this.__rpc_exec_stage != NetworkBehaviour.__RpcExecStage.Execute && (networkManager.IsServer || networkManager.IsHost))
 			{
-				ClientRpcParams clientRpcParams;
+				ClientRpcParams clientRpcParams = default;
 				FastBufferWriter fastBufferWriter = base.__beginSendClientRpc(2512017138U, clientRpcParams, RpcDelivery.Reliable);
 				base.__endSendClientRpc(ref fastBufferWriter, 2512017138U, clientRpcParams, RpcDelivery.Reliable);
 			}
@@ -708,9 +708,9 @@ namespace Shambler.src.Soul_Devourer
 			}
 			Vector3 vector;
 			reader.ReadValueSafe(out vector);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
+			((ShamblerStake)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
 			((ShamblerStake)target).SetPositionClientRpc(vector);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
+			((ShamblerStake)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
 		}
 
 		private static void __rpc_handler_2061572526(NetworkBehaviour target, FastBufferReader reader, __RpcParams rpcParams)
@@ -720,9 +720,9 @@ namespace Shambler.src.Soul_Devourer
 			{
 				return;
 			}
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
+			((ShamblerStake)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
 			((ShamblerStake)target).StartSetupClientRpc();
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
+			((ShamblerStake)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
 		}
 
 		private static void __rpc_handler_4254107206(NetworkBehaviour target, FastBufferReader reader, __RpcParams rpcParams)
@@ -734,9 +734,9 @@ namespace Shambler.src.Soul_Devourer
 			}
 			ulong num;
 			ByteUnpacker.ReadValueBitPacked(reader, out num);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
+			((ShamblerStake)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
 			((ShamblerStake)target).SetVictimClientRpc(num);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
+			((ShamblerStake)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
 		}
 
 		private static void __rpc_handler_423408505(NetworkBehaviour target, FastBufferReader reader, __RpcParams rpcParams)
@@ -746,9 +746,9 @@ namespace Shambler.src.Soul_Devourer
 			{
 				return;
 			}
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
+			((ShamblerStake)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
 			((ShamblerStake)target).DetachClientRpc();
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
+			((ShamblerStake)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
 		}
 
 		private static void __rpc_handler_772911773(NetworkBehaviour target, FastBufferReader reader, __RpcParams rpcParams)
@@ -762,9 +762,9 @@ namespace Shambler.src.Soul_Devourer
 			ByteUnpacker.ReadValueBitPacked(reader, out num);
 			Vector3 vector;
 			reader.ReadValueSafe(out vector);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
+			((ShamblerStake)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
 			((ShamblerStake)target).NavSnapClientRpc(num, vector);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
+			((ShamblerStake)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
 		}
 
 		private static void __rpc_handler_4142245935(NetworkBehaviour target, FastBufferReader reader, __RpcParams rpcParams)
@@ -778,9 +778,9 @@ namespace Shambler.src.Soul_Devourer
 			ByteUnpacker.ReadValueBitPacked(reader, out num);
 			int num2;
 			ByteUnpacker.ReadValueBitPacked(reader, out num2);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
+			((ShamblerStake)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
 			((ShamblerStake)target).updateStatsClientRpc(num, num2);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
+			((ShamblerStake)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
 		}
 
 		private static void __rpc_handler_515288598(NetworkBehaviour target, FastBufferReader reader, __RpcParams rpcParams)
@@ -794,9 +794,9 @@ namespace Shambler.src.Soul_Devourer
 			ByteUnpacker.ReadValueBitPacked(reader, out num);
 			int num2;
 			ByteUnpacker.ReadValueBitPacked(reader, out num2);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
+			((ShamblerStake)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
 			((ShamblerStake)target).DmgPlayerClientRpc(num, num2);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
+			((ShamblerStake)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
 		}
 
 		private static void __rpc_handler_320229780(NetworkBehaviour target, FastBufferReader reader, __RpcParams rpcParams)
@@ -813,9 +813,9 @@ namespace Shambler.src.Soul_Devourer
 			{
 				reader.ReadValueSafe(out text, false);
 			}
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
+			((ShamblerStake)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
 			((ShamblerStake)target).SetHoverTipClientRpc(text);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
+			((ShamblerStake)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
 		}
 
 		private static void __rpc_handler_3261615666(NetworkBehaviour target, FastBufferReader reader, __RpcParams rpcParams)
@@ -825,9 +825,9 @@ namespace Shambler.src.Soul_Devourer
 			{
 				return;
 			}
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
+			((ShamblerStake)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
 			((ShamblerStake)target).DisableInteractClientRpc();
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
+			((ShamblerStake)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
 		}
 
 		private static void __rpc_handler_1210762366(NetworkBehaviour target, FastBufferReader reader, __RpcParams rpcParams)
@@ -839,9 +839,9 @@ namespace Shambler.src.Soul_Devourer
 			}
 			ulong num;
 			ByteUnpacker.ReadValueBitPacked(reader, out num);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
+			((ShamblerStake)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
 			((ShamblerStake)target).ResetFallValuesClientRpc(num);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
+			((ShamblerStake)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
 		}
 
 		private static void __rpc_handler_3271024941(NetworkBehaviour target, FastBufferReader reader, __RpcParams rpcParams)
@@ -855,9 +855,9 @@ namespace Shambler.src.Soul_Devourer
 			ByteUnpacker.ReadValueBitPacked(reader, out num);
 			bool flag;
 			reader.ReadValueSafe<bool>(out flag, default(FastBufferWriter.ForPrimitives));
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
+			((ShamblerStake)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
 			((ShamblerStake)target).SetColliderClientRpc(num, flag);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
+			((ShamblerStake)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
 		}
 
 		private static void __rpc_handler_3534838218(NetworkBehaviour target, FastBufferReader reader, __RpcParams rpcParams)
@@ -869,9 +869,9 @@ namespace Shambler.src.Soul_Devourer
 			}
 			ulong num;
 			ByteUnpacker.ReadValueBitPacked(reader, out num);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
+			((ShamblerStake)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
 			((ShamblerStake)target).AttemptFreeServerRpc(num);
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
+			((ShamblerStake)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
 		}
 
 		private static void __rpc_handler_353136177(NetworkBehaviour target, FastBufferReader reader, __RpcParams rpcParams)
@@ -881,9 +881,9 @@ namespace Shambler.src.Soul_Devourer
 			{
 				return;
 			}
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
+			((ShamblerStake)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
 			((ShamblerStake)target).PlaySuccessClientRpc();
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
+			((ShamblerStake)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
 		}
 
 		private static void __rpc_handler_2512017138(NetworkBehaviour target, FastBufferReader reader, __RpcParams rpcParams)
@@ -893,12 +893,12 @@ namespace Shambler.src.Soul_Devourer
 			{
 				return;
 			}
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
+			((ShamblerStake)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Execute;
 			((ShamblerStake)target).PlayFailEscapeClientRpc();
-			target.__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
+			((ShamblerStake)target).__rpc_exec_stage = NetworkBehaviour.__RpcExecStage.Send;
 		}
 
-		protected internal override string __getTypeName()
+		protected override string __getTypeName()
 		{
 			return "ShamblerStake";
 		}
