@@ -440,7 +440,7 @@ namespace Shambler.src.Soul_Devourer
                 bool flag = ply.NetworkObject.NetworkObjectId == playerid;
                 if (flag)
                 {
-                    ply.DamagePlayer(30, true, true, CauseOfDeath.Stabbing, 0, false, default(Vector3));
+                    ply.DamagePlayer(20, true, true, CauseOfDeath.Stabbing, 0, false, default(Vector3));
                 }
             }
         }

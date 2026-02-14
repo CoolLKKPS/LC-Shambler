@@ -665,7 +665,7 @@ namespace SoulDev
                 this.stabbedCapturedPlayer = true;
                 if (this.stabbedPlayer != null)
                 {
-                    this.DmgPlayerClientRpc(this.stabbedPlayer.NetworkObject.NetworkObjectId, 30);
+                    this.DmgPlayerClientRpc(this.stabbedPlayer.NetworkObject.NetworkObjectId, 20);
                 }
                 yield return new WaitForSeconds(0.65f);
                 this.doneStab = true;
@@ -765,7 +765,7 @@ namespace SoulDev
             this.stabbedCapturedPlayer = true;
             if (this.stabbedPlayer != null)
             {
-                this.DmgPlayerClientRpc(this.stabbedPlayer.NetworkObject.NetworkObjectId, 30);
+                this.DmgPlayerClientRpc(this.stabbedPlayer.NetworkObject.NetworkObjectId, 20);
             }
             yield return new WaitForSeconds(1.3f);
             bool flag3 = this.stabbedPlayer;
@@ -917,17 +917,27 @@ namespace SoulDev
             PlayerControllerB[] players = RoundManager.Instance.playersManager.allPlayerScripts;
             foreach (PlayerControllerB ply in players)
             {
-                if (ply == this.capturedPlayer)
+                if (ply == this.capturedPlayer || ply == this.stabbedPlayer)
                     continue;
                 bool flag = Vector3.Distance(ply.transform.position, base.transform.position) < this.captureRange;
                 if (flag)
                 {
                     this.Think("Shambler: I GOTCHA");
+                    if (this.capturedPlayer != null)
+                    {
+                        this.DmgPlayerClientRpc(this.capturedPlayer.NetworkObject.NetworkObjectId, 20);
+                        this.letGoOfPlayerClientRpc(this.capturedPlayer.NetworkObject.NetworkObjectId);
+                    }
+                    else if (this.stabbedPlayer != null)
+                    {
+                        this.DmgPlayerClientRpc(this.stabbedPlayer.NetworkObject.NetworkObjectId, 10);
+                        this.letGoOfPlayerClientRpc(this.stabbedPlayer.NetworkObject.NetworkObjectId);
+                    }
                     this.capturedPlayer = ply;
                     this.stabbedCapturedPlayer = false;
                     this.attachPlayerClientRpc(this.capturedPlayer.NetworkObject.NetworkObjectId, false, 50);
                     this.timeTillStab = (float)(2.0 + 30.0 * this.enemyRandom.NextDouble() * this.enemyRandom.NextDouble() * this.enemyRandom.NextDouble());
-                    this.DmgPlayerClientRpc(ply.NetworkObject.NetworkObjectId, 30);
+                    this.DmgPlayerClientRpc(ply.NetworkObject.NetworkObjectId, 20);
                     return;
                 }
             }
@@ -1650,8 +1660,8 @@ namespace SoulDev
                     {
                         maxAlertUpdate = localAlertLevel;
                     }
+                    }
                 }
-            }
             bool flag3 = maxAlertUpdate > 0f;
             if (flag3)
             {
@@ -2180,6 +2190,12 @@ namespace SoulDev
             this.EscapingEmployees.Clear();
         }
 
+        public async void DelayedRemoveFromStuckList(ulong playerId)
+        {
+            await Task.Delay(1000);
+            ShamblerEnemy.stuckPlayerIds.Remove(playerId);
+        }
+
         public override void HitEnemy(int force = 1, PlayerControllerB playerWhoHit = null, bool playHitSFX = false, int hitID = -1)
         {
             base.HitEnemy(force, playerWhoHit, playHitSFX, -1);
@@ -2341,8 +2357,8 @@ namespace SoulDev
             }
             this.capturedPlayer = null;
             this.stabbedPlayer = null;
-            if (targetPlayer != null && !ShamblerEnemy.IsPlayerStaked(targetPlayer))
-                ShamblerEnemy.stuckPlayerIds.Remove(targetPlayer.NetworkObject.NetworkObjectId);
+            if (targetPlayer != null)
+                this.DelayedRemoveFromStuckList(targetPlayer.NetworkObject.NetworkObjectId);
         }
 
         public override void OnCollideWithEnemy(Collider other, EnemyAI collidedEnemy = null)
@@ -2368,6 +2384,7 @@ namespace SoulDev
             }
         }
 
+        /*
         public override void OnCollideWithPlayer(Collider other)
         {
             bool flag = this.timeSinceHittingLocalPlayer < 0.6f;
@@ -2377,10 +2394,14 @@ namespace SoulDev
                 bool flag2 = pcb;
                 if (flag2)
                 {
-                    this.DmgPlayerClientRpc(pcb.NetworkObject.NetworkObjectId, 60);
+                    if (pcb != this.capturedPlayer && pcb != this.stabbedPlayer)
+                    {
+                        this.DmgPlayerClientRpc(pcb.NetworkObject.NetworkObjectId, 20);
+                    }
                 }
             }
         }
+        */
 
         [ServerRpc(RequireOwnership = false)]
         public void attachPlayerServerRpc(ulong uid, bool lastHit, int staminaGrant)
